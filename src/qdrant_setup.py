@@ -270,11 +270,11 @@ class QdrantRealDataManager:
         """Search for mutations similar to query"""
         query_vector = self.embedder.encode(query).tolist()
         
-        results = self.client.search(
+        results = self.client.query_points(
             collection_name=self.collections["her2_mutations"]["name"],
-            query_vector=query_vector,
+            query=query_vector,
             limit=limit
-        )
+        ).points
         
         return [
             {
@@ -302,11 +302,11 @@ class QdrantRealDataManager:
         query_text = f"Antibodies targeting HER2 with mutation {mutation_id} at position {mutation.get('protein_position', '')}"
         query_vector = self.embedder.encode(query_text).tolist()
         
-        results = self.client.search(
+        results = self.client.query_points(
             collection_name=self.collections["antibody_db"]["name"],
-            query_vector=query_vector,
+            query=query_vector,
             limit=limit
-        )
+        ).points
         
         return [
             {
@@ -336,12 +336,12 @@ class QdrantRealDataManager:
                 ]
             )
         
-        results = self.client.search(
+        results = self.client.query_points(
             collection_name=self.collections["scientific_literature"]["name"],
-            query_vector=query_vector,
+            query=query_vector,
             query_filter=search_filter,
             limit=limit
-        )
+        ).points
         
         return [
             {
@@ -392,3 +392,4 @@ if __name__ == "__main__":
     print("\n📊 Qdrant Collection Stats:")
     for col, stat in stats.items():
         print(f"   {col}: {stat.get('vectors_count', 'N/A')} vectors")
+    

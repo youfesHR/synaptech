@@ -1,5 +1,4 @@
-mutation_id,gene,amino_acid_change,mutation_type,protein_position,reference_allele,variant_allele,protein_domain,clinical_significance,resistance_to,pubmed_references,prevalence,mechanism
-L755S,ERBB2,p.Leu755Ser,Missense_Mutation,755,L,S,Kinase domain,Pathogenic,"['Trastuzumab', 'Lapatinib']","['31586423', '28714456']",~5% of resistant cases,Steric hindrance in ATP binding pocket
-T798I,ERBB2,p.Thr798Ile,Missense_Mutation,798,T,I,Gatekeeper residue,Resistance,"['Neratinib', 'Afatinib']",['33139524'],~2% of resistant cases,Increased hydrophobic bulk prevents drug binding
-D769H,ERBB2,p.Asp769His,Missense_Mutation,769,D,H,Activation loop,Pathogenic,['Trastuzumab'],['25695953'],~3% of resistant cases,Alters activation loop conformation
-V777L,ERBB2,p.Val777Leu,Missense_Mutation,777,V,L,Kinase domain,Resistance,['Lapatinib'],['22927447'],~1% of resistant cases,Increased side chain size blocks drug access
+patient_id,mutation_value,mutation_type,mutation_id,gene
+TCGA-XX-XXXX,L755S (Missense),Missense_Mutation,L755S,ERBB2
+TCGA-YY-YYYY,T798I (Missense),Missense_Mutation,T798I,ERBB2
+TCGA-ZZ-ZZZZ,D769H (Missense),Missense_Mutation,D769H,ERBB2
