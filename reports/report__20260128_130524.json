@@ -1,0 +1,300 @@
+{
+  "report_id": "HER2_Report__20260128_130524",
+  "mutation": "",
+  "timestamp": "2026-01-28T13:05:24.424708",
+  "summary": {
+    "candidates_generated": 3,
+    "top_score": 0.8747,
+    "average_feasibility": 0.7713333333333333
+  },
+  "evidence_found": {
+    "similar_mutations": 5,
+    "relevant_papers": 3,
+    "evidence_score": 0.575
+  },
+  "top_candidates": [
+    {
+      "candidate_id": "DES__001_f0b9099c",
+      "sequence": "QVQLQESGPGLVKPSETLSLTCTVSWWGWYYFWYWWVRQAPGKGLEWVAYWDFHYFWTIYWKWWRFTISADTSKNTAYLQMNSLRAEDTAVYYCWGGDYRYYMDYWGQGTLVTVSS",
+      "cdr1": "WWGWYYFWYW",
+      "cdr2": "AYWDFHYFWTIYWKWW",
+      "cdr3": "WGGDYRYYMDY",
+      "framework": "VH4-34",
+      "length": 116,
+      "design_confidence": 0.95,
+      "binding_optimization": 0.0,
+      "stability_score": 0.554,
+      "specificity_score": 0.966,
+      "biochemical_properties": {
+        "length": 116,
+        "molecular_weight": 14117.656599999993,
+        "isoelectric_point": 5.6752824783325195,
+        "gravy": -0.3844827586206894,
+        "instability_index": 25.97241379310344,
+        "aromaticity": 0.2672413793103448,
+        "secondary_structure_fraction": [
+          0.20689655172413796,
+          0.2413793103448276,
+          0.5086206896551724
+        ],
+        "molar_extinction_coefficient": [
+          96370,
+          96495
+        ],
+        "amino_acid_composition": {
+          "A": 0.05172413793103448,
+          "C": 0.017241379310344827,
+          "D": 0.04310344827586207,
+          "E": 0.034482758620689655,
+          "F": 0.034482758620689655,
+          "G": 0.07758620689655173,
+          "H": 0.008620689655172414,
+          "I": 0.017241379310344827,
+          "K": 0.034482758620689655,
+          "L": 0.06896551724137931,
+          "M": 0.017241379310344827,
+          "N": 0.017241379310344827,
+          "P": 0.02586206896551724,
+          "Q": 0.05172413793103448,
+          "R": 0.034482758620689655,
+          "S": 0.07758620689655173,
+          "T": 0.08620689655172414,
+          "V": 0.06896551724137931,
+          "W": 0.12068965517241378,
+          "Y": 0.11206896551724138
+        },
+        "charge_at_ph7": 0
+      },
+      "feasibility_score": 0.929,
+      "feasibility_category": "Excellent",
+      "passes": [
+        "Length OK (116 residues)",
+        "Cysteine count OK (2, all can form disulfides)",
+        "No problematic motifs detected",
+        "Isoelectric point OK (pI = 5.68)",
+        "Hydrophobicity OK (GRAVY = -0.38)",
+        "Stable protein (instability index = 26.0)",
+        "Good sequence complexity (0.77)"
+      ],
+      "warnings": [],
+      "issues": [],
+      "critical_issues": [],
+      "manufacturing_risks": [
+        "Aggregation risk: 9 consecutive hydrophobic residues",
+        "Protease cleavage site: GP",
+        "Oxidation risk: High tryptophan count (14)",
+        "Isomerization risk at position 70"
+      ],
+      "recommendations": [
+        "Good candidate for immediate synthesis and testing",
+        "Consider adding solubility tags or optimizing hydrophobic patches",
+        "Validate binding with computational docking",
+        "Test expression in mammalian system (HEK293 or CHO)"
+      ],
+      "scientific_support_score": 0.845,
+      "supporting_papers": [
+        "34567890",
+        "31234567",
+        "25253727"
+      ],
+      "evidence_statements": [
+        "The T798I gatekeeper mutation prevents binding of lapatinib and neratinib...",
+        "D769H mutations in the HER2 extracellular domain alter the orientation of the binding pocket..."
+      ],
+      "confidence_level": "High",
+      "combined_score": 0.8747,
+      "evidence_score": 0.575
+    },
+    {
+      "candidate_id": "DES__002_eb5ba80f",
+      "sequence": "EVQLVESGGGLVQPGKSLRLSCAASWSFWYQSYWYWVRQAPGKGLEWVYFIFYFNWRFWYYKWWRFTISADTSKNTAYLQMNSLRAEDTAVYYCWGGDDFYAMYYWGQGTLVTVSS",
+      "cdr1": "WSFWYQSYWY",
+      "cdr2": "YFIFYFNWRFWYYKWW",
+      "cdr3": "WGGDDFYAMYY",
+      "framework": "VH3-07",
+      "length": 116,
+      "design_confidence": 0.95,
+      "binding_optimization": 0.0,
+      "stability_score": 0.546,
+      "specificity_score": 0.977,
+      "biochemical_properties": {
+        "length": 116,
+        "molecular_weight": 13890.44079999999,
+        "isoelectric_point": 7.988100242614746,
+        "gravy": -0.2482758620689656,
+        "instability_index": 32.94499999999999,
+        "aromaticity": 0.2672413793103448,
+        "secondary_structure_fraction": [
+          0.22413793103448276,
+          0.25862068965517243,
+          0.47413793103448276
+        ],
+        "molar_extinction_coefficient": [
+          79870,
+          79995
+        ],
+        "amino_acid_composition": {
+          "A": 0.06896551724137931,
+          "C": 0.017241379310344827,
+          "D": 0.034482758620689655,
+          "E": 0.034482758620689655,
+          "F": 0.06034482758620689,
+          "G": 0.08620689655172414,
+          "H": 0.0,
+          "I": 0.017241379310344827,
+          "K": 0.034482758620689655,
+          "L": 0.06896551724137931,
+          "M": 0.017241379310344827,
+          "N": 0.02586206896551724,
+          "P": 0.017241379310344827,
+          "Q": 0.05172413793103448,
+          "R": 0.04310344827586207,
+          "S": 0.09482758620689655,
+          "T": 0.05172413793103448,
+          "V": 0.06896551724137931,
+          "W": 0.09482758620689655,
+          "Y": 0.11206896551724138
+        },
+        "charge_at_ph7": 1
+      },
+      "feasibility_score": 0.929,
+      "feasibility_category": "Excellent",
+      "passes": [
+        "Length OK (116 residues)",
+        "Cysteine count OK (2, all can form disulfides)",
+        "No problematic motifs detected",
+        "Isoelectric point OK (pI = 7.99)",
+        "Hydrophobicity OK (GRAVY = -0.25)",
+        "Stable protein (instability index = 32.9)",
+        "Good sequence complexity (0.77)"
+      ],
+      "warnings": [],
+      "issues": [],
+      "critical_issues": [],
+      "manufacturing_risks": [
+        "Aggregation risk: 8 consecutive hydrophobic residues",
+        "Protease cleavage site: AP",
+        "Oxidation risk: High tryptophan count (11)",
+        "Isomerization risk at position 70"
+      ],
+      "recommendations": [
+        "Good candidate for immediate synthesis and testing",
+        "Consider adding solubility tags or optimizing hydrophobic patches",
+        "Validate binding with computational docking",
+        "Test expression in mammalian system (HEK293 or CHO)"
+      ],
+      "scientific_support_score": 0.845,
+      "supporting_papers": [
+        "34567890",
+        "31234567",
+        "25253727"
+      ],
+      "evidence_statements": [
+        "The T798I gatekeeper mutation prevents binding of lapatinib and neratinib...",
+        "D769H mutations in the HER2 extracellular domain alter the orientation of the binding pocket..."
+      ],
+      "confidence_level": "High",
+      "combined_score": 0.8747,
+      "evidence_score": 0.575
+    },
+    {
+      "candidate_id": "DES__003_3f34866c",
+      "sequence": "EVQLVESGGGLVQPGGSLRLSCAASWTCWFYTYYWWVRQAPGKGLEWVERFYWWFFDHRVWFWFRFTISADTSKNTAYLQMNSLRAEDTAVYYCRGDDGFRDMRYWGQGTLVTVSS",
+      "cdr1": "WTCWFYTYYW",
+      "cdr2": "ERFYWWFFDHRVWFWF",
+      "cdr3": "RGDDGFRDMRY",
+      "framework": "VH3-23",
+      "length": 116,
+      "design_confidence": 0.6399999999999999,
+      "binding_optimization": 0.0,
+      "stability_score": 0.572,
+      "specificity_score": 0.678,
+      "biochemical_properties": {
+        "length": 116,
+        "molecular_weight": 13761.276099999985,
+        "isoelectric_point": 6.844687843322753,
+        "gravy": -0.3043103448275862,
+        "instability_index": 24.83465517241378,
+        "aromaticity": 0.22413793103448276,
+        "secondary_structure_fraction": [
+          0.20689655172413793,
+          0.2586206896551724,
+          0.4482758620689655
+        ],
+        "molar_extinction_coefficient": [
+          66920,
+          67045
+        ],
+        "amino_acid_composition": {
+          "A": 0.06034482758620689,
+          "C": 0.02586206896551724,
+          "D": 0.05172413793103448,
+          "E": 0.04310344827586207,
+          "F": 0.06896551724137931,
+          "G": 0.09482758620689655,
+          "H": 0.008620689655172414,
+          "I": 0.008620689655172414,
+          "K": 0.017241379310344827,
+          "L": 0.06896551724137931,
+          "M": 0.017241379310344827,
+          "N": 0.017241379310344827,
+          "P": 0.017241379310344827,
+          "Q": 0.04310344827586207,
+          "R": 0.07758620689655173,
+          "S": 0.07758620689655173,
+          "T": 0.06896551724137931,
+          "V": 0.07758620689655173,
+          "W": 0.08620689655172414,
+          "Y": 0.06896551724137931
+        },
+        "charge_at_ph7": 1
+      },
+      "feasibility_score": 0.456,
+      "feasibility_category": "Poor",
+      "passes": [
+        "Length OK (116 residues)",
+        "No problematic motifs detected",
+        "Isoelectric point OK (pI = 6.84)",
+        "Hydrophobicity OK (GRAVY = -0.30)",
+        "Stable protein (instability index = 24.8)",
+        "Good sequence complexity (0.80)"
+      ],
+      "warnings": [],
+      "issues": [],
+      "critical_issues": [
+        "Odd number of cysteines (3) - cannot form proper disulfide bonds"
+      ],
+      "manufacturing_risks": [
+        "Aggregation risk: 6 consecutive hydrophobic residues",
+        "Protease cleavage site: AP",
+        "Oxidation risk: High tryptophan count (10)",
+        "Isomerization risk at position 70"
+      ],
+      "recommendations": [
+        "Not recommended for synthesis without major redesign",
+        "Fix critical issues first: Odd number of cysteines (3) - cannot form proper disulfide bonds",
+        "Consider adding solubility tags or optimizing hydrophobic patches",
+        "Validate binding with computational docking",
+        "Test expression in mammalian system (HEK293 or CHO)"
+      ],
+      "scientific_support_score": 0.752,
+      "supporting_papers": [
+        "34567890",
+        "31234567",
+        "25253727"
+      ],
+      "evidence_statements": [
+        "The T798I gatekeeper mutation prevents binding of lapatinib and neratinib...",
+        "D769H mutations in the HER2 extracellular domain alter the orientation of the binding pocket..."
+      ],
+      "confidence_level": "High",
+      "combined_score": 0.6119,
+      "evidence_score": 0.575
+    }
+  ],
+  "recommendations": [
+    "Prioritize DES__001_f0b9099c for synthesis (Feasibility: 0.93, Combined Score: 0.87)",
+    "Consider in vitro testing for top 2-3 candidates",
+    "Validate binding with computational docking before synthesis"
+  ]
+}

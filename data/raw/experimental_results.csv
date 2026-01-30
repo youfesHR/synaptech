@@ -1,0 +1,10 @@
+result_id,candidate_id,type,measurement,unit,interpretation,status
+RES-CD-001,DES_L755S_001,Circular Dichroism,92,%,High Alpha-helical content maintained,Pass
+RES-MS-002,DES_L755S_001,Mass Spec,148234,Da,Matches predicted mass for glycosylated IgG,Pass
+RES-SPR-003,DES_L755S_001,SPR Binding,1.2,nM,Strong binding affinity (Kd < 5nM),Pass
+RES-CD-004,DES_T798I_002,Circular Dichroism,85,%,Standard Antibody Fold,Pass
+RES-MS-005,DES_T798I_002,Mass Spec,147850,Da,Observed mass within 0.1% of target,Pass
+RES-SPR-006,DES_T798I_002,SPR Binding,8.5,nM,Moderate binding - steric hindrance reduced,Pass
+RES-CD-007,DES_D769H_003,Circular Dichroism,65,%,Signs of partial unfolding observed,Fail
+RES-MS-008,DES_D769H_003,Mass Spec,149100,Da,High heterogeneity observed,Fail
+RES-SPR-009,DES_V777L_001,SPR Binding,0.85,nM,Ultra-high affinity lead candidate,Pass

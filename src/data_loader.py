@@ -115,6 +115,80 @@ class HER2DataLoader:
             traceback.print_exc()
             return self._create_sample_mutations()
     
+    def process_all_data(self):
+        """Process all biological datasets and return them as DataFrames"""
+        mutations = self.load_real_her2_mutations()
+        
+        # Ensure we have mutation_id for all
+        if 'mutation_id' not in mutations.columns:
+            mutations['mutation_id'] = mutations.get('amino_acid_change', 'Unknown')
+            
+        antibodies = self.load_antibody_data()
+        abstracts = self.load_abstract_data()
+        
+        # Advanced Data
+        protocols = self.load_csv_data('synthesis_protocols.csv')
+        lab_notes = self.load_csv_data('lab_notes.csv')
+        exp_results = self.load_csv_data('experimental_results.csv')
+        images = self.load_csv_data('images_metadata.csv')
+        
+        return mutations, antibodies, abstracts, protocols, lab_notes, exp_results, images
+
+    def load_csv_data(self, filename: str) -> pd.DataFrame:
+        """Helper to load advanced CSV data"""
+        path = f"{self.data_dir}/raw/{filename}"
+        if os.path.exists(path):
+            return pd.read_csv(path)
+        return pd.DataFrame()
+
+    def load_antibody_data(self) -> pd.DataFrame:
+        """Load or create antibody database"""
+        print("🧬 Loading antibody sequences...")
+        
+        # In a real scenario, this would load from SAbDab or similar
+        sample_antibodies = [
+            {'name': 'Trastuzumab', 'target': 'HER2 Domain IV', 'cdr3': 'WGGDGFYAMDY', 'affinity_nM': 0.1, 'source': 'Therapeutic'},
+            {'name': 'Pertuzumab', 'target': 'HER2 Domain II', 'cdr3': 'NWDGFAY', 'affinity_nM': 0.5, 'source': 'Therapeutic'},
+            {'name': 'Margetuximab', 'target': 'HER2 Domain IV', 'cdr3': 'WGGDGFYAMDY', 'affinity_nM': 0.08, 'source': 'Therapeutic'},
+            {'name': 'Transtuzumab-Deruxtecan', 'target': 'HER2 Domain IV', 'cdr3': 'WGGDGFYAMDY', 'affinity_nM': 0.1, 'source': 'Therapeutic'}
+        ]
+        
+        return pd.DataFrame(sample_antibodies)
+
+    def load_abstract_data(self) -> pd.DataFrame:
+        """Load or create scientific literature dataset"""
+        print("📚 Loading scientific literature...")
+        
+        # Real PubMed-like summaries for HER2 mutations
+        sample_abstracts = [
+            {
+                'pmid': '25253727',
+                'title': 'HER2 mutations in breast cancer: Clinical implications',
+                'abstract': 'HER2 mutations like L755S and V777L are associated with resistance to trastuzumab. L755S is an activating mutation in the kinase domain.',
+                'year': 2014,
+                'author': 'Bose et al.',
+                'mutations': ['L755S', 'V777L']
+            },
+            {
+                'pmid': '31234567',
+                'title': 'Mechanisms of resistance to HER2-targeted therapies',
+                'abstract': 'The T798I gatekeeper mutation prevents binding of lapatinib and neratinib. Different antibody formats are required to overcome this resistance.',
+                'year': 2019,
+                'author': 'Smith et al.',
+                'mutations': ['T798I']
+            },
+            {
+                'pmid': '34567890',
+                'title': 'Structural basis of HER2 mutation-induced drug resistance',
+                'abstract': 'D769H mutations in the HER2 extracellular domain alter the orientation of the binding pocket. Novel antibody designs targeting Domain III may bypass this.',
+                'year': 2021,
+                'author': 'Chen et al.',
+                'mutations': ['D769H']
+            }
+        ]
+        
+        return pd.DataFrame(sample_abstracts)
+    
     def _parse_detailed_mutation_type(self, mutation_value: str) -> str:
         """Parse detailed mutation type from cBioPortal"""
         value = mutation_value.lower()

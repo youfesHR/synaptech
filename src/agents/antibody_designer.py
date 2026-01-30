@@ -21,7 +21,14 @@ class AntibodyDesignerAgent:
             'aromatic': ['F', 'W', 'Y'],
             'charged_positive': ['R', 'H', 'K'],
             'charged_negative': ['D', 'E'],
-            'polar': ['S', 'T', 'N', 'Q', 'Y']
+            'polar': ['S', 'T', 'N', 'Q', 'Y'],
+            # Standard Human Codon Table (simplified for discovery)
+            'codon_map': {
+                'A': 'GCT', 'C': 'TGC', 'D': 'GAC', 'E': 'GAG', 'F': 'TTC',
+                'G': 'GGC', 'H': 'CAC', 'I': 'ATC', 'K': 'AAG', 'L': 'CTG',
+                'M': 'ATG', 'N': 'AAC', 'P': 'CCC', 'Q': 'CAG', 'R': 'CGC',
+                'S': 'TCC', 'T': 'ACC', 'V': 'GTG', 'W': 'TGG', 'Y': 'TAC'
+            }
         }
         
         # Known HER2 binding motifs based on literature
@@ -92,7 +99,8 @@ class AntibodyDesignerAgent:
                                                                         self.aa_properties['charged_negative']),
                     "cysteine_count": full_sequence.count('C'),
                     "glycosylation_sites": self._count_glycosylation_sites(full_sequence)
-                }
+                },
+                "genetic_code": self._back_translate_to_dna(full_sequence)
             }
             
             candidates.append(candidate)
@@ -285,3 +293,10 @@ class AntibodyDesignerAgent:
             if seq == framework_seq:
                 return name
         return "Custom"
+
+    def _back_translate_to_dna(self, amino_acid_sequence: str) -> str:
+        """Convert amino acid sequence to DNA using human codon optimization"""
+        dna_sequence = []
+        for aa in amino_acid_sequence:
+            dna_sequence.append(self.aa_properties['codon_map'].get(aa, 'NNN'))
+        return "".join(dna_sequence)

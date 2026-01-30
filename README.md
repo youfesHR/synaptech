@@ -24,4 +24,25 @@ Qdrant serves as the central knowledge base with multiple specialized collection
 - **Filtered search** (e.g., "papers mentioning L755S mutation")
 - **Real-time candidate storage** for designed antibodies
 
-## 🏗️ System Architecture
+## 🏗️ System Architecture: Multi-Agent Framework
+The system implements a multi-agent AI framework designed for clinical utility:
+1. **Similarity Scout**: Searches for mutation analogs and historical experiments.
+2. **Antibody Designer**: Generates sequences using biochemical heuristics.
+3. **Evidence Linker**: Connects design choices to PubMed literature.
+4. **Feasibility Checker**: Validates chemical stability and manufacturing risks.
+5. **RealDataOrchestrator**: Integrates all agents into a unified pipeline.
+
+## 📊 Decision Quadrant
+Candidates are prioritized on a 2D axis:
+- **X-Axis**: Lab Feasibility (Calculated via BioPython & heuristics)
+- **Y-Axis**: Scientific Support (Indexed from PubMed & historical trials)
+
+## 🚀 Getting Started
+1. Install dependencies: `pip install -r requirements.txt`
+2. Run the full app: `python run_app.py`
+3. Access the Dashboard at `http://localhost:5173`
+
+## 🔮 Multimodal Features
+- **Text**: PubMed abstracts & Clinical notes
+- **Sequences**: VH/VL CDR regions
+- **Experiments**: Historical success/failure labels for similar mutations

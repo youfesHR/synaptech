@@ -1,0 +1,282 @@
+{
+  "report_id": "HER2_Report_L755S_20260130_223243",
+  "mutation": "L755S",
+  "timestamp": "2026-01-30T22:32:43.178168",
+  "summary": {
+    "candidates_generated": 3,
+    "top_score": 0.8288,
+    "average_feasibility": 0.9249999999999999
+  },
+  "evidence_found": {
+    "similar_mutations": 5,
+    "relevant_papers": 1,
+    "evidence_score": 0.602
+  },
+  "top_candidates": [
+    {
+      "candidate_id": "DES_L755S_002_d76bd0f6",
+      "sequence": "QVQLQESGPGLVKPSETLSLTCTVSFFNWWTYQWGWVRQAPGKGLEWVHWRFLQWSLEFEHHWNRFTISADTSKNTAYLQMNSLRAEDTAVYYCWGGWWFYAHDYWGQGTLVTVSS",
+      "cdr1": "FFNWWTYQWG",
+      "cdr2": "HWRFLQWSLEFEHHWN",
+      "cdr3": "WGGWWFYAHDY",
+      "framework": "VH4-34",
+      "length": 116,
+      "design_confidence": 0.95,
+      "binding_optimization": 0.636,
+      "stability_score": 0.584,
+      "specificity_score": 0.851,
+      "biochemical_properties": {
+        "length": 116,
+        "molecular_weight": 13762.17329999999,
+        "isoelectric_point": 6.043371772766113,
+        "gravy": -0.40862068965517234,
+        "instability_index": 28.725948275862056,
+        "aromaticity": 0.20689655172413793,
+        "secondary_structure_fraction": [
+          0.22413793103448276,
+          0.25,
+          0.45689655172413796
+        ],
+        "molar_extinction_coefficient": [
+          74940,
+          75065
+        ],
+        "amino_acid_composition": {
+          "A": 0.05172413793103448,
+          "C": 0.017241379310344827,
+          "D": 0.02586206896551724,
+          "E": 0.05172413793103448,
+          "F": 0.05172413793103448,
+          "G": 0.07758620689655173,
+          "H": 0.034482758620689655,
+          "I": 0.008620689655172414,
+          "K": 0.02586206896551724,
+          "L": 0.08620689655172414,
+          "M": 0.008620689655172414,
+          "N": 0.034482758620689655,
+          "P": 0.02586206896551724,
+          "Q": 0.06896551724137931,
+          "R": 0.034482758620689655,
+          "S": 0.08620689655172414,
+          "T": 0.08620689655172414,
+          "V": 0.06896551724137931,
+          "W": 0.10344827586206896,
+          "Y": 0.05172413793103448
+        },
+        "charge_at_ph7": 2
+      },
+      "feasibility_score": 0.977,
+      "feasibility_category": "Excellent",
+      "passes": [
+        "Length OK (116 residues)",
+        "Cysteine count OK (2, all can form disulfides)",
+        "No problematic motifs detected",
+        "Isoelectric point OK (pI = 6.04)",
+        "Hydrophobicity OK (GRAVY = -0.41)",
+        "Stable protein (instability index = 28.7)",
+        "Good sequence complexity (0.82)"
+      ],
+      "warnings": [],
+      "issues": [],
+      "critical_issues": [],
+      "manufacturing_risks": [
+        "Protease cleavage site: GP",
+        "Oxidation risk: High tryptophan count (12)",
+        "Isomerization risk at position 70"
+      ],
+      "recommendations": [
+        "Good candidate for immediate synthesis and testing",
+        "Consider mutation to remove protease sites",
+        "Validate binding with computational docking",
+        "Test expression in mammalian system (HEK293 or CHO)"
+      ],
+      "scientific_support_score": 0.635,
+      "supporting_papers": [
+        "25253727"
+      ],
+      "evidence_statements": [],
+      "confidence_level": "Medium",
+      "combined_score": 0.8288,
+      "evidence_score": 0.602
+    },
+    {
+      "candidate_id": "DES_L755S_003_9ffc4bb8",
+      "sequence": "EVQLVESGGGLVQPGGSLRLSCAASYWTWTQRNTYWVRQAPGKGLEWVARNFRHYESIYYNWYQRFTISADTSKNTAYLQMNSLRAEDTAVYYCHGFYHRWAMDYWGQGTLVTVSS",
+      "cdr1": "YWTWTQRNTY",
+      "cdr2": "ARNFRHYESIYYNWYQ",
+      "cdr3": "HGFYHRWAMDY",
+      "framework": "VH3-23",
+      "length": 116,
+      "design_confidence": 0.95,
+      "binding_optimization": 0.636,
+      "stability_score": 0.584,
+      "specificity_score": 0.793,
+      "biochemical_properties": {
+        "length": 116,
+        "molecular_weight": 13511.86329999999,
+        "isoelectric_point": 8.621115303039552,
+        "gravy": -0.5094827586206898,
+        "instability_index": 30.728534482758626,
+        "aromaticity": 0.18103448275862066,
+        "secondary_structure_fraction": [
+          0.22413793103448276,
+          0.25862068965517243,
+          0.4137931034482758
+        ],
+        "molar_extinction_coefficient": [
+          54890,
+          55015
+        ],
+        "amino_acid_composition": {
+          "A": 0.07758620689655173,
+          "C": 0.017241379310344827,
+          "D": 0.02586206896551724,
+          "E": 0.04310344827586207,
+          "F": 0.02586206896551724,
+          "G": 0.08620689655172414,
+          "H": 0.02586206896551724,
+          "I": 0.017241379310344827,
+          "K": 0.017241379310344827,
+          "L": 0.06896551724137931,
+          "M": 0.017241379310344827,
+          "N": 0.04310344827586207,
+          "P": 0.017241379310344827,
+          "Q": 0.06034482758620689,
+          "R": 0.06896551724137931,
+          "S": 0.08620689655172414,
+          "T": 0.07758620689655173,
+          "V": 0.06896551724137931,
+          "W": 0.06034482758620689,
+          "Y": 0.09482758620689655
+        },
+        "charge_at_ph7": 5
+      },
+      "feasibility_score": 0.977,
+      "feasibility_category": "Excellent",
+      "passes": [
+        "Length OK (116 residues)",
+        "Cysteine count OK (2, all can form disulfides)",
+        "No problematic motifs detected",
+        "Isoelectric point OK (pI = 8.62)",
+        "Hydrophobicity OK (GRAVY = -0.51)",
+        "Stable protein (instability index = 30.7)",
+        "Good sequence complexity (0.83)"
+      ],
+      "warnings": [],
+      "issues": [],
+      "critical_issues": [],
+      "manufacturing_risks": [
+        "Protease cleavage site: AP",
+        "Oxidation risk: High tryptophan count (7)",
+        "Deamidation risk at position 32"
+      ],
+      "recommendations": [
+        "Good candidate for immediate synthesis and testing",
+        "Consider mutation to remove protease sites",
+        "Validate binding with computational docking",
+        "Test expression in mammalian system (HEK293 or CHO)"
+      ],
+      "scientific_support_score": 0.635,
+      "supporting_papers": [
+        "25253727"
+      ],
+      "evidence_statements": [],
+      "confidence_level": "Medium",
+      "combined_score": 0.8288,
+      "evidence_score": 0.602
+    },
+    {
+      "candidate_id": "DES_L755S_001_e86c76a7",
+      "sequence": "QVQLQESGPGLVKPSETLSLTCTVSRFFHWASGYQWVRQAPGKGLEWVWMWHYYLRWTFYYFFWRFTISADTSKNTAYLQMNSLRAEDTAVYYCFRFYYFYAMDYWGQGTLVTVSS",
+      "cdr1": "RFFHWASGYQ",
+      "cdr2": "WMWHYYLRWTFYYFFW",
+      "cdr3": "FRFYYFYAMDY",
+      "framework": "VH4-34",
+      "length": 116,
+      "design_confidence": 0.95,
+      "binding_optimization": 0.727,
+      "stability_score": 0.554,
+      "specificity_score": 0.966,
+      "biochemical_properties": {
+        "length": 116,
+        "molecular_weight": 13967.634399999988,
+        "isoelectric_point": 8.571152305603029,
+        "gravy": -0.22155172413793106,
+        "instability_index": 47.908879310344815,
+        "aromaticity": 0.25,
+        "secondary_structure_fraction": [
+          0.22413793103448276,
+          0.21551724137931033,
+          0.49137931034482757
+        ],
+        "molar_extinction_coefficient": [
+          61880,
+          62005
+        ],
+        "amino_acid_composition": {
+          "A": 0.06034482758620689,
+          "C": 0.017241379310344827,
+          "D": 0.02586206896551724,
+          "E": 0.034482758620689655,
+          "F": 0.07758620689655173,
+          "G": 0.06034482758620689,
+          "H": 0.017241379310344827,
+          "I": 0.008620689655172414,
+          "K": 0.02586206896551724,
+          "L": 0.07758620689655173,
+          "M": 0.02586206896551724,
+          "N": 0.017241379310344827,
+          "P": 0.02586206896551724,
+          "Q": 0.06034482758620689,
+          "R": 0.05172413793103448,
+          "S": 0.08620689655172414,
+          "T": 0.08620689655172414,
+          "V": 0.06896551724137931,
+          "W": 0.06896551724137931,
+          "Y": 0.10344827586206896
+        },
+        "charge_at_ph7": 4
+      },
+      "feasibility_score": 0.821,
+      "feasibility_category": "Good",
+      "passes": [
+        "Length OK (116 residues)",
+        "Cysteine count OK (2, all can form disulfides)",
+        "No problematic motifs detected",
+        "Isoelectric point OK (pI = 8.57)",
+        "Hydrophobicity OK (GRAVY = -0.22)",
+        "Good sequence complexity (0.80)"
+      ],
+      "warnings": [
+        "Potentially unstable (instability index = 47.9)"
+      ],
+      "issues": [],
+      "critical_issues": [],
+      "manufacturing_risks": [
+        "Aggregation risk: 6 consecutive hydrophobic residues",
+        "Protease cleavage site: GP",
+        "Oxidation risk: High tryptophan count (8)",
+        "Isomerization risk at position 70"
+      ],
+      "recommendations": [
+        "Good candidate for immediate synthesis and testing",
+        "Consider adding solubility tags or optimizing hydrophobic patches",
+        "Validate binding with computational docking",
+        "Test expression in mammalian system (HEK293 or CHO)"
+      ],
+      "scientific_support_score": 0.635,
+      "supporting_papers": [
+        "25253727"
+      ],
+      "evidence_statements": [],
+      "confidence_level": "Medium",
+      "combined_score": 0.782,
+      "evidence_score": 0.602
+    }
+  ],
+  "recommendations": [
+    "Prioritize DES_L755S_002_d76bd0f6 for synthesis (Feasibility: 0.98, Combined Score: 0.83)",
+    "Consider in vitro testing for top 2-3 candidates",
+    "Validate binding with computational docking before synthesis"
+  ]
+}

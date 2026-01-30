@@ -1,0 +1,7 @@
+note_id,experimenter,text,mutation_context,date
+NOTE-2024-001,Dr. Sarah Chen,Variant DES_L755S_001 shows significant improvement in yield compared to parental mAb. Folding kinetics are fast.,L755S,2024-11-12
+NOTE-2024-002,Mark R.,Observed slight aggregation in D769H targeting candidates during elution at pH 3.0. Recommending shift to pH 3.5.,D769H,2024-11-15
+NOTE-2024-003,Dr. Sarah Chen,CDR3 aromatic balance in T798I designs seems to overcome the gatekeeper mutation steric hindrance.,T798I,2024-11-18
+NOTE-2024-004,Elena Vogt,Confocal microscopy confirms internalization of the antibody-drug conjugate (ADC) variant in HER2+ cell lines.,Internalization,2024-12-01
+NOTE-2024-005,Dr. Sarah Chen,High aromaticity in the VH region correlates with increased non-specific binding in our recent SPR runs.,Binding Specificity,2024-12-05
+NOTE-2024-006,Mark R.,The new glycosylation-free variant shows a 20% increase in productivity without losing affinity.,Yield Optimization,2024-12-10

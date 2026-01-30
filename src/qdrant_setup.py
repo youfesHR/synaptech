@@ -67,6 +67,52 @@ class QdrantRealDataManager:
                     "mutation_mentions": "keyword[]",
                     "antibody_mentions": "keyword[]"
                 }
+            },
+            "lab_experiments": {
+                "name": "lab_experiments",
+                "vector_size": 384,
+                "payload_schema": {
+                    "exp_id": "keyword",
+                    "mutation": "keyword",
+                    "conditions": "text",
+                    "measurements": "float",
+                    "outcome": "keyword",
+                    "notes": "text"
+                }
+            },
+            "synthesis_protocols": {
+                "name": "synthesis_protocols",
+                "vector_size": 384,
+                "payload_schema": {
+                    "protocol_id": "keyword",
+                    "name": "text",
+                    "steps": "text",
+                    "reagents": "text",
+                    "target": "keyword"
+                }
+            },
+            "lab_notes": {
+                "name": "lab_notes",
+                "vector_size": 384,
+                "payload_schema": {
+                    "note_id": "keyword",
+                    "experimenter": "keyword",
+                    "text": "text",
+                    "mutation_context": "keyword",
+                    "date": "keyword"
+                }
+            },
+            "experimental_results": {
+                "name": "experimental_results",
+                "vector_size": 384,
+                "payload_schema": {
+                    "result_id": "keyword",
+                    "candidate_id": "keyword",
+                    "type": "keyword",
+                    "measurement": "float",
+                    "unit": "keyword",
+                    "interpretation": "text"
+                }
             }
         }
     
@@ -265,6 +311,42 @@ class QdrantRealDataManager:
         )
         
         print(f"✅ Loaded {len(points)} abstracts to Qdrant")
+
+    def load_protocols_to_qdrant(self, protocols_df: pd.DataFrame):
+        """Load synthesis protocols to Qdrant"""
+        if protocols_df.empty: return
+        print(f"Loading {len(protocols_df)} protocols to Qdrant...")
+        points = []
+        for idx, row in protocols_df.iterrows():
+            text = f"Protocol: {row['name']}. Steps: {row['steps']}"
+            vector = self.embedder.encode(text[:1000]).tolist()
+            doc_hash = hashlib.md5(str(row['protocol_id']).encode()).hexdigest()[:8]
+            points.append(PointStruct(id=int(doc_hash, 16) % 1000000 + 4000000, vector=vector, payload=row.to_dict()))
+        self.client.upsert(collection_name="synthesis_protocols", points=points)
+
+    def load_lab_notes_to_qdrant(self, notes_df: pd.DataFrame):
+        """Load lab notes to Qdrant"""
+        if notes_df.empty: return
+        print(f"Loading {len(notes_df)} lab notes to Qdrant...")
+        points = []
+        for idx, row in notes_df.iterrows():
+            text = f"Lab Note ({row['mutation_context']}): {row['text']}"
+            vector = self.embedder.encode(text[:1000]).tolist()
+            doc_hash = hashlib.md5(str(row['note_id']).encode()).hexdigest()[:8]
+            points.append(PointStruct(id=int(doc_hash, 16) % 1000000 + 5000000, vector=vector, payload=row.to_dict()))
+        self.client.upsert(collection_name="lab_notes", points=points)
+
+    def load_experimental_results_to_qdrant(self, results_df: pd.DataFrame):
+        """Load granular experimental results to Qdrant"""
+        if results_df.empty: return
+        print(f"Loading {len(results_df)} experimental results to Qdrant...")
+        points = []
+        for idx, row in results_df.iterrows():
+            text = f"Result for {row['candidate_id']}: {row['type']} - {row['interpretation']}"
+            vector = self.embedder.encode(text[:1000]).tolist()
+            doc_hash = hashlib.md5(str(row['result_id']).encode()).hexdigest()[:8]
+            points.append(PointStruct(id=int(doc_hash, 16) % 1000000 + 6000000, vector=vector, payload=row.to_dict()))
+        self.client.upsert(collection_name="experimental_results", points=points)
     
     def search_mutations(self, query: str, limit: int = 5):
         """Search for mutations similar to query"""
@@ -355,6 +437,27 @@ class QdrantRealDataManager:
             for hit in results
         ]
     
+    def search_experiments(self, query: str, limit: int = 5):
+        """Search for similar lab experiments"""
+        query_vector = self.embedder.encode(query).tolist()
+        
+        results = self.client.query_points(
+            collection_name=self.collections["lab_experiments"]["name"],
+            query=query_vector,
+            limit=limit
+        ).points
+        
+        return [
+            {
+                "score": hit.score,
+                "exp_id": hit.payload.get("exp_id"),
+                "outcome": hit.payload.get("outcome"),
+                "notes": hit.payload.get("notes"),
+                "measurements": hit.payload.get("measurements")
+            }
+            for hit in results
+        ]
+    
     def get_collection_stats(self):
         """Get statistics for all collections"""
         stats = {}
@@ -372,6 +475,26 @@ class QdrantRealDataManager:
         
         return stats
 
+    def seed_experiments(self):
+        """Seed default experimental data if collection is empty"""
+        stats = self.get_collection_stats()
+        if stats.get('lab_experiments', {}).get('vectors_count', 0) == 0:
+            print("🌱 Seeding lab experiments collection...")
+            exp_data = pd.DataFrame([
+                {"exp_id": "EXP-H2-001", "mutation": "L755S", "conditions": "pH 7.4, 37°C, SPR Assay", "measurements": 0.85, "outcome": "Success", "notes": "Strong binding with optimized CDR3 aromatic clusters."},
+                {"exp_id": "EXP-H2-002", "mutation": "T798I", "conditions": "pH 6.5, 37°C, Cell-based", "measurements": 0.12, "outcome": "Failure", "notes": "Gatekeeper mutation blocks binding pocket; steric hindrance observed."},
+                {"exp_id": "EXP-H2-003", "mutation": "V777L", "conditions": "pH 7.4, 4°C, Flow Cytometry", "measurements": 0.76, "outcome": "Success", "notes": "Hydrophobic patch optimization improved stability by 24%."},
+                {"exp_id": "EXP-H3-001", "mutation": "D769H", "conditions": "pH 7.2, 37°C, ELISA", "measurements": 0.45, "outcome": "Success", "notes": "Electrostatic interaction restored via Histidine-targeting motifs."},
+                {"exp_id": "EXP-H3-002", "mutation": "L755S", "conditions": "pH 5.5, 37°C, Stability", "measurements": 0.31, "outcome": "Failure", "notes": "Protein aggregation observed in acidic endosomal-mimic conditions."}
+            ])
+            points = []
+            for idx, row in exp_data.iterrows():
+                text = f"Experiment {row['exp_id']} for {row['mutation']}: {row['notes']}"
+                vector = self.embedder.encode(text).tolist()
+                points.append(PointStruct(id=3000000+idx, vector=vector, payload=row.to_dict()))
+            self.client.upsert(collection_name="lab_experiments", points=points)
+            print(f"✅ Seeded {len(points)} experiments")
+
 if __name__ == "__main__":
     # Test the Qdrant setup
     qdrant_manager = QdrantRealDataManager()
@@ -387,9 +510,23 @@ if __name__ == "__main__":
     qdrant_manager.load_antibodies_to_qdrant(antibodies)
     qdrant_manager.load_abstracts_to_qdrant(abstracts)
     
+    # Load sample experiments
+    exp_data = pd.DataFrame([
+        {"exp_id": "EXP001", "mutation": "L755S", "conditions": "pH 7.4, 37C", "measurements": 0.85, "outcome": "Success", "notes": "High binding affinity observed"},
+        {"exp_id": "EXP002", "mutation": "T798I", "conditions": "pH 6.8, 37C", "measurements": 0.12, "outcome": "Failure", "notes": "Poor stability in acidic conditions"}
+    ])
+    
+    points = []
+    for idx, row in exp_data.iterrows():
+        text = f"Experiment {row['exp_id']} for {row['mutation']}: {row['notes']}"
+        vector = qdrant_manager.embedder.encode(text).tolist()
+        points.append(PointStruct(id=3000000+idx, vector=vector, payload=row.to_dict()))
+    
+    qdrant_manager.client.upsert(collection_name="lab_experiments", points=points)
+    print(f"✅ Loaded {len(points)} sample experiments")
+
     # Get stats
     stats = qdrant_manager.get_collection_stats()
     print("\n📊 Qdrant Collection Stats:")
     for col, stat in stats.items():
         print(f"   {col}: {stat.get('vectors_count', 'N/A')} vectors")
-    

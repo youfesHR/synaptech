@@ -3,12 +3,14 @@ import json
 from datetime import datetime
 from typing import Dict, List
 import pandas as pd
+import os
 
 from qdrant_setup import QdrantRealDataManager
 from data_loader import HER2DataLoader
 from agents.similarity_scout import SimilarityScoutAgent
 from agents.antibody_designer import AntibodyDesignerAgent
 from agents.feasibility_checker import FeasibilityCheckerAgent
+from agents.evidence_linker import EvidenceLinkerAgent
 
 class RealDataOrchestrator:
     """
@@ -30,6 +32,7 @@ class RealDataOrchestrator:
         self.scout_agent = SimilarityScoutAgent(self.qdrant_manager)
         self.designer_agent = AntibodyDesignerAgent()
         self.checker_agent = FeasibilityCheckerAgent()
+        self.linker_agent = EvidenceLinkerAgent(self.qdrant_manager)
         
         # Load or create data
         if use_existing_data:
@@ -39,11 +42,21 @@ class RealDataOrchestrator:
                 self.antibodies = pd.read_csv("data/processed/antibodies_processed.csv")
                 self.abstracts = pd.read_csv("data/processed/abstracts_processed.csv")
                 
+                # Advanced Data
+                self.protocols = pd.read_csv("data/raw/synthesis_protocols.csv") if os.path.exists("data/raw/synthesis_protocols.csv") else pd.DataFrame()
+                self.lab_notes = pd.read_csv("data/raw/lab_notes.csv") if os.path.exists("data/raw/lab_notes.csv") else pd.DataFrame()
+                self.experimental_results = pd.read_csv("data/raw/experimental_results.csv") if os.path.exists("data/raw/experimental_results.csv") else pd.DataFrame()
+                self.images = pd.read_csv("data/raw/images_metadata.csv") if os.path.exists("data/raw/images_metadata.csv") else pd.DataFrame()
+                
                 # Load data to Qdrant
                 print("   Loading data to Qdrant...")
                 self.qdrant_manager.load_mutations_to_qdrant(self.mutations)
                 self.qdrant_manager.load_antibodies_to_qdrant(self.antibodies)
                 self.qdrant_manager.load_abstracts_to_qdrant(self.abstracts)
+                self.qdrant_manager.load_protocols_to_qdrant(self.protocols)
+                self.qdrant_manager.load_lab_notes_to_qdrant(self.lab_notes)
+                self.qdrant_manager.load_experimental_results_to_qdrant(self.experimental_results)
+                self.qdrant_manager.seed_experiments()
                 
             except FileNotFoundError:
                 print("   No existing data found, creating new...")
@@ -57,7 +70,9 @@ class RealDataOrchestrator:
     def _load_and_setup_data(self):
         """Load and setup all data"""
         print("\n📥 Loading real biological datasets...")
-        self.mutations, self.antibodies, self.abstracts = self.data_loader.process_all_data()
+        (self.mutations, self.antibodies, self.abstracts, 
+         self.protocols, self.lab_notes, self.experimental_results, 
+         self.images) = self.data_loader.process_all_data()
         
         print("\n🗄️ Initializing Qdrant collections...")
         self.qdrant_manager.initialize_collections()
@@ -66,6 +81,10 @@ class RealDataOrchestrator:
         self.qdrant_manager.load_mutations_to_qdrant(self.mutations)
         self.qdrant_manager.load_antibodies_to_qdrant(self.antibodies)
         self.qdrant_manager.load_abstracts_to_qdrant(self.abstracts)
+        self.qdrant_manager.load_protocols_to_qdrant(self.protocols)
+        self.qdrant_manager.load_lab_notes_to_qdrant(self.lab_notes)
+        self.qdrant_manager.load_experimental_results_to_qdrant(self.experimental_results)
+        self.qdrant_manager.seed_experiments()
     
     def _show_system_status(self):
         """Display system status"""
@@ -142,9 +161,14 @@ class RealDataOrchestrator:
             # Evaluate feasibility
             feasibility = self.checker_agent.evaluate_candidate(candidate)
             
+            # Link evidence and get scientific support score
+            evidence_link = self.linker_agent.link_evidence(mutation_id, candidate)
+            support_score = evidence_link['scientific_support_score']
+            
             # Combine scores: 40% evidence, 30% design, 30% feasibility
             combined_score = (
-                0.4 * evidence_score +
+                0.3 * support_score +
+                0.1 * evidence_score +
                 0.3 * candidate['design_confidence'] +
                 0.3 * feasibility['feasibility_score']
             )
@@ -152,6 +176,7 @@ class RealDataOrchestrator:
             candidate_result = {
                 **candidate,
                 **feasibility,
+                **evidence_link,
                 "combined_score": combined_score,
                 "evidence_score": evidence_score
             }

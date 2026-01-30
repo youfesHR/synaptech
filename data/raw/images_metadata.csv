@@ -1,0 +1,8 @@
+image_id,candidate_id,type,description,path
+IMG-GEL-001,DES_L755S_001,SDS-PAGE Gel,Purity analysis under reducing/non-reducing conditions.,data/images/gel_755s_001.png
+IMG-CONF-002,DES_L755S_001,Confocal Microscopy,HER2 binding verification on HER2-overexpressing cell line.,data/images/conf_755s_001.png
+IMG-SPR-003,DES_T798I_002,SPR Sensorgram,Real-time association and dissociation kinetics sensorgram.,data/images/spr_798i_002.png
+IMG-GEL-004,DES_V777L_001,SDS-PAGE Gel,Lead candidate purity and assembly verification.,data/images/gel_777l_001.png
+IMG-CONF-005,DES_V777L_001,Confocal Microscopy,Co-localization with intracellular markers for ADC potential.,data/images/conf_777l_001.png
+IMG-CD-006,DES_D769H_003,CD Spectra,Spectroscopy showing thermal unfolding transition.,data/images/cd_769h_003.png
+IMG-MS-007,DES_L755S_002,Mass Spec Plot,N-glycan profile and mass heterogeneity analysis.,data/images/ms_755s_002.png
